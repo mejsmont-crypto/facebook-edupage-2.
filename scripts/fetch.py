@@ -8,7 +8,7 @@ if not TOKEN or not PAGE:
     raise SystemExit('Brak FB_PAGE_TOKEN lub FB_PAGE_ID w GitHub Secrets/Variables')
 fields='id,message,created_time,permalink_url,full_picture,attachments{media,type,subattachments{media,type}}'
 params=urllib.parse.urlencode({'fields':fields,'limit':15,'access_token':TOKEN})
-url=f'https://graph.facebook.com/{VERSION}/{urllib.parse.quote(PAGE,safe="")}/posts?{params}'
+url=f'https://graph.facebook.com/{VERSION}/me/feed?{params}'
 try:
     req=urllib.request.Request(url,headers={'User-Agent':'SchoolFacebookFeed/1.0'})
     with urllib.request.urlopen(req,timeout=30) as r: data=json.load(r)
